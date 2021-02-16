@@ -24,11 +24,12 @@ class SendSmsJob implements ShouldQueue
 
     public function handle()
     {
-        Sms::pattern('o8wjg0z7g8')->data([
+        $bulk_id = Sms::pattern('o8wjg0z7g8')->data([
             'name' => 'امیر',
             'course' => 'مبانی',
             'time' => '10'
         ])->to(['989198336033'])->send();
+        
         $this->notification->sent_at = now();
         $this->notification->save();
     }
