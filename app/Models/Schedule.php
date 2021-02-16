@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Schedule extends Model
 {
     use HasFactory;
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);    
+    }
 }
