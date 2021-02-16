@@ -9,6 +9,9 @@
 @endsection
 
 @section('content')
+    <div class="container-md bg-dark text-light">
+        <form action="{{ route() }}" method="post"></form>
+    </div>
     <span :title="message">@{{ msg }}</span>
     <button @click="messageChange">bbbbb</button>
 @endsection

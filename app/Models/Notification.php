@@ -13,4 +13,9 @@ class Notification extends Model
     {
         return $this->belongsTo(Schedule::class);
     }
+
+    public function pattern()
+    {
+        return $this->belongsTo(Pattern::class);
+    }
 }
