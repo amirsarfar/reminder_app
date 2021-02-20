@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\Notification;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -24,12 +25,16 @@ class SendSmsJob implements ShouldQueue
 
     public function handle()
     {
+        // echo $this->notification->deadline . "\t" . Carbon::now()->timestamp . "\n";
+        $users = $this->notification->schedule->users;
+        $data = json_decode($this->notification->data);
+
         $bulk_id = Sms::pattern('o8wjg0z7g8')->data([
-            'name' => 'امیر',
-            'course' => 'مبانی',
-            'time' => '10'
-        ])->to(['989198336033'])->send();
-        
+            'name' => $data->name,
+            'course' => $data->course,
+            'time' => $data->time
+        ])->to($users->pluck('phone')->all())->send();
+    
         $this->notification->sent_at = now();
         $this->notification->save();
     }

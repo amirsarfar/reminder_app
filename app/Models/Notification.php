@@ -9,6 +9,8 @@ class Notification extends Model
 {
     use HasFactory;
 
+    protected $guarded= [];
+
     public function schedule()
     {
         return $this->belongsTo(Schedule::class);

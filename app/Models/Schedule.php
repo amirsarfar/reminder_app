@@ -11,7 +11,7 @@ class Schedule extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class);
     }
 
     public function notifications()
